@@ -2,7 +2,7 @@
   <div id="app">
   <TodoHeader/>
   <TodoInput @sendTodo="parentSendTodo"/>
-  <TodoList :todoList="todoList"/>
+  <TodoList :todoList="todoList"/> 
   </div>
 </template>
 
