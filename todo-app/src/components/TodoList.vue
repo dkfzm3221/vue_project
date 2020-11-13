@@ -2,8 +2,11 @@
     <section>
         <ul>
             <li v-for="item in todoList" :key="item.id">
-                <i class="checkBtn fas fa-check" aria-hidden="true"></i>
-                {{item.todo}}
+                <font-awesome-icon class="checkBtn" icon="check"/>
+                {{item.id}} {{item.todo}}
+                <font-awesome-icon class="removeBtn" icon="trash-alt"
+                @click="removeItem(item.i_todo)"
+                />
             </li>
         </ul>
     </section>
@@ -11,6 +14,11 @@
 <script>
 export default {
     props:['todoList'],
+    methods:{
+        removeItem(i_todo){
+            this.$emit('removeItem', i_todo)
+        }
+    }
 }
 </script>
 <style scoped>
@@ -33,10 +41,12 @@ li{
     line-height: 45px;
     color: #62acde;
     margin-right: 5px;
+    margin-top: 17px;
 }
 
 .removeBtn {
     margin-left: auto;
     color: #de4343;
+    margin-top: 17px;
 }
 </style>

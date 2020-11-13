@@ -2,20 +2,25 @@
   <div id="app">
   <TodoHeader/>
   <TodoInput @sendTodo="parentSendTodo"/>
-  <TodoList :todoList="todoList"/> 
+  <TodoList :todoList="todoList"
+    @removeItem="parentDelTodo"
+  /> 
+  <TodoFooter @removeAll="parentDelAll"/>
   </div>
 </template>
 
-<script>
+<script> 
 import TodoHeader from './components/TodoHeader';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
-
-
+import TodoFooter from './components/TodoFooter';
 
 export default {
   name: 'App',
-  components: {TodoHeader, TodoInput, TodoList},
+  components: {TodoHeader, TodoInput, TodoList, TodoFooter},
+  created(){
+    this.selTodoList();
+  },
   data() {
     return {
       id: 0,
@@ -23,12 +28,19 @@ export default {
     }
   },
   methods:{
+    selTodoList(){
+      this.$http.get('/api/selTodoList').then((res) => {
+      this.todoList = res.data
+    })
+    },
     parentSendTodo(todo) {
-      var obj = {
-        id: ++this.id,
-        todo: todo
-      }
-      this.todoList.push(obj)
+    
+    },
+    parentDelTodo(id) {
+    
+    },
+    parentDelAll(){
+     
     }
   }
 }
